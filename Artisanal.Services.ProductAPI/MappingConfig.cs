@@ -12,7 +12,9 @@ namespace Artisanal.Services.ProductAPI
 
             {
                 config.CreateMap<ProductDto, Product>();
+                config.CreateMap<CategoryDto, Category>();
                 config.CreateMap<Product, ProductDto>();
+                config.CreateMap<Category, CategoryDto>();
             });
 
             return mappingConfig;

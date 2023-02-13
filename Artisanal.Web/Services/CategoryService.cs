@@ -4,66 +4,62 @@ using Newtonsoft.Json.Linq;
 
 namespace Artisanal.Web.Services
 {
-    public class ProductService : BaseService, IProductService
+    public class CategoryService : BaseService, ICategoryService
     {
         private readonly IHttpClientFactory _httpClient;
-        public ProductService(IHttpClientFactory httpClient) :base(httpClient)
+        public CategoryService(IHttpClientFactory httpClient):base(httpClient)
         {
             _httpClient = httpClient;
         }
 
-        public async Task<T> CreateProductAsync<T>(ProductDto productDto)
+        public async Task<T> CreateCategoryAsync<T>(CategoryDto categoryDto)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.POST,
-                Data= productDto,   
-                Url = SD.ProductAPIBase + "/api/products",
+                Data= categoryDto,   
+                Url = SD.ProductAPIBase + "/api/categories",
         });
         }
 
-        public async Task<T> DeleteProductAsync<T>(int id)
+        public async Task<T> DeleteCategoryAsync<T>(int id)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.DELETE,
-                Url = SD.ProductAPIBase + "/api/products/"+id,
+                Url = SD.ProductAPIBase + "/api/categories/" + id,
                 //AccessToken = token
-
             });
         }
 
-        public async Task<T> GetAllProductsAsync<T>()
+        public async Task<T> GetAllCategoriesAsync<T>()
         {
            return await this.SendAsync<T>(new ApiRequest()
             {
                  ApiType=SD.ApiType.GET,
-                 Url=SD.ProductAPIBase+"/api/products",
+                 Url=SD.ProductAPIBase+ "/api/categories",
                 // AccessToken=token
-
             });
         }
 
-        public async Task<T> GetProductByIdAsync<T>(int id)
+        public async Task<T> GetCategoryByIdAsync<T>(int id)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.GET,
-                Url = SD.ProductAPIBase + "/api/products/"+id,
+                Url = SD.ProductAPIBase + "/api/categories/" + id,
                // AccessToken = token
-
             });
         }
 
-        public async Task<T> UpdateProductAsync<T>(ProductDto productDto)
+        public async Task<T> UpdateCategoryAsync<T>(CategoryDto categoryDto)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = SD.ApiType.PUT,
-                Data= productDto,
-                Url = SD.ProductAPIBase + "/api/products",
+                Data= categoryDto,
+                Url = SD.ProductAPIBase + "/api/categories",
                // AccessToken = token
-
             });
         }
     }

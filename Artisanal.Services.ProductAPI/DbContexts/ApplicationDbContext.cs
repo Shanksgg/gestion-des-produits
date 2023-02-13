@@ -16,7 +16,6 @@ namespace Artisanal.Services.ProductAPI.DbContexts
         {
             base.OnModelCreating(modelBuilder);
 
-
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 1,
@@ -40,6 +39,12 @@ namespace Artisanal.Services.ProductAPI.DbContexts
                 Price = 15,
                 CategoryName = "categorie1",
                 ImageURL = "3.jpg"
+            });
+            
+            modelBuilder.Entity<Category>().HasData(new Category
+            {
+                CategoryId = 1,
+                CategoryName = "categorie1"
             });
         }
 

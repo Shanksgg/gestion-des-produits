@@ -5,10 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Artisanal.Services.ProductAPI.Controllers
 {
-    [Route("api/category")]
+    [Route("api/categories")]
     public class CategoryAPIController : ControllerBase
     {
-
         protected ResponseDto _response;
         private ICategoryRepository _categoryRepository;
         public CategoryAPIController(ICategoryRepository categoryRepository)
@@ -23,8 +22,8 @@ namespace Artisanal.Services.ProductAPI.Controllers
         {
           try
             {
-                IEnumerable<ProductDto> productDtos = await _productRepository.GetProducts();
-                _response.Result = productDtos;
+                IEnumerable<CategoryDto> categoryDtos = await _categoryRepository.GetCategories();
+                _response.Result = categoryDtos;
                
             }
                 catch (Exception ex)
@@ -42,8 +41,8 @@ namespace Artisanal.Services.ProductAPI.Controllers
         public async Task<object> Get(int id) {
               try
                {
-                    ProductDto productDto = await _productRepository.GetProductById(id);
-                    _response.Result = productDto;
+                    CategoryDto categoryDto = await _categoryRepository.GetCategoryById(id);
+                    _response.Result = categoryDto;
                    
                }
                 catch (Exception ex)
@@ -58,11 +57,11 @@ namespace Artisanal.Services.ProductAPI.Controllers
 
         [HttpPost]
         //[Authorize]
-        public async Task<object> Post([FromBody] ProductDto productDto)
+        public async Task<object> Post([FromBody] CategoryDto categoryDto)
         {
             try
             {
-                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
+                CategoryDto model = await _categoryRepository.CreateUpdateCategory(categoryDto);
                 _response.Result = model;
             }
             catch (Exception ex)
@@ -77,11 +76,11 @@ namespace Artisanal.Services.ProductAPI.Controllers
 
         [HttpPut]
         //[Authorize]
-        public async Task<object> Put([FromBody] ProductDto productDto)
+        public async Task<object> Put([FromBody] CategoryDto categoryDto)
         {
             try
             {
-                ProductDto model = await _productRepository.CreateUpdateProduct(productDto);
+                CategoryDto model = await _categoryRepository.CreateUpdateCategory(categoryDto);
                 _response.Result = model;
             }
             catch (Exception ex)
@@ -100,7 +99,7 @@ namespace Artisanal.Services.ProductAPI.Controllers
         {
             try
             {
-                bool isSuccess = await _productRepository.DeleteProduct(id);
+                bool isSuccess = await _categoryRepository.DeleteCategory(id);
                 _response.Result = isSuccess;
             }
             catch (Exception ex)
