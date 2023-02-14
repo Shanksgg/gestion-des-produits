@@ -29,12 +29,18 @@ namespace Artisanal.Services.ProductAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductName = table.Column<string>(type: "nvarchar(28)", maxLength: 28, nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
-                    CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     ImageURL = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -43,23 +49,38 @@ namespace Artisanal.Services.ProductAPI.Migrations
                 values: new object[] { 1, "categorie1" });
 
             migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryId", "CategoryName" },
+                values: new object[] { 2, "categorie2" });
+
+            migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "ProductId", "CategoryName", "ImageURL", "Price", "ProductName" },
-                values: new object[,]
-                {
-                    { 1, "categorie1", "1.jpg", 15.0, "ChaiseBoisMassif" },
-                    { 2, "categorie2", "2.jpg", 15.0, "RangementBoisMassif" },
-                    { 3, "categorie1", "3.jpg", 15.0, "DecorArtis" }
-                });
+                columns: new[] { "ProductId", "CategoryId", "ImageURL", "Price", "ProductName" },
+                values: new object[] { 1, 1, "1.jpg", 15.0, "ChaiseBoisMassif" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "CategoryId", "ImageURL", "Price", "ProductName" },
+                values: new object[] { 2, 1, "2.jpg", 15.0, "RangementBoisMassif" });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "CategoryId", "ImageURL", "Price", "ProductName" },
+                values: new object[] { 3, 2, "3.jpg", 15.0, "DecorArtis" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Categories");
         }
     }
 }

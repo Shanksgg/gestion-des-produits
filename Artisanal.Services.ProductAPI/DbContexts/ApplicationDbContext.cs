@@ -9,27 +9,30 @@ namespace Artisanal.Services.ProductAPI.DbContexts
         {
                 
         }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 1,
                 ProductName = "ChaiseBoisMassif",
                 Price = 15,
-                CategoryName = "categorie1",
+                CategoryId = 1,
                 ImageURL = "1.jpg"
-            });
+            }); 
             modelBuilder.Entity<Product>().HasData(new Product
             {
                 ProductId = 2,
                 ProductName = "RangementBoisMassif",
                 Price = 15,
-                CategoryName = "categorie2",
+                CategoryId = 1,
                 ImageURL = "2.jpg"
             });
             modelBuilder.Entity<Product>().HasData(new Product
@@ -37,7 +40,7 @@ namespace Artisanal.Services.ProductAPI.DbContexts
                 ProductId = 3,
                 ProductName = "DecorArtis",
                 Price = 15,
-                CategoryName = "categorie1",
+                CategoryId = 2,
                 ImageURL = "3.jpg"
             });
             
@@ -45,6 +48,11 @@ namespace Artisanal.Services.ProductAPI.DbContexts
             {
                 CategoryId = 1,
                 CategoryName = "categorie1"
+            });
+            modelBuilder.Entity<Category>().HasData(new Category
+            {
+                CategoryId = 2,
+                CategoryName = "categorie2"
             });
         }
 

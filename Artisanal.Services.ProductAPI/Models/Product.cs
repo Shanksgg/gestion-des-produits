@@ -14,7 +14,9 @@ namespace Artisanal.Services.ProductAPI.Models
         [Required, StringLength(28)]
         public string ProductName { get; set; }
         public double Price { get; set; }
-        public string CategoryName { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
         [Required, StringLength(32)]
         public string ImageURL { get; set; }
     }

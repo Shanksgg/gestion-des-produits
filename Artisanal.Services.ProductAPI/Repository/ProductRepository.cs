@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Artisanal.Services.ProductAPI.Repository
 {
-   
     public class ProductRepository : IProductRepository
     {
         private readonly ApplicationDbContext _db;
@@ -56,8 +55,14 @@ namespace Artisanal.Services.ProductAPI.Repository
         public async Task<ProductDto> GetProductById(int productId)
         {
             Product product = await _db.Products.Where(x => x.ProductId == productId).FirstOrDefaultAsync();
-            
             return _mapper.Map<ProductDto>(product);
+        }
+
+        public async Task<CategoryDto> GetCategoryByProductId(int categoryId)
+        {
+            Category category = await _db.Categories.Where(x => x.CategoryId == categoryId).FirstOrDefaultAsync();
+
+            return _mapper.Map<CategoryDto>(category);
         }
 
         public async Task<IEnumerable<ProductDto>> GetProducts()
@@ -65,7 +70,6 @@ namespace Artisanal.Services.ProductAPI.Repository
             List<Product> productList = await _db.Products.ToListAsync();
 
             return _mapper.Map<List<ProductDto>>(productList);
-
         }
     }
 }

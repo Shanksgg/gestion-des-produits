@@ -2,15 +2,18 @@
 using Artisanal.Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Artisanal.Web.Controllers
 {
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        private readonly ICategoryService _categoryService;
+        public ProductController(IProductService productService, ICategoryService categoryService)
         {
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         public async Task<IActionResult> ProductIndex()
@@ -19,6 +22,17 @@ namespace Artisanal.Web.Controllers
             var response = await _productService.GetAllProductsAsync<ResponseDto>();
             if(response != null) { 
                 list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
+
+                foreach (var item in list)
+                {
+                    var tmpResponse = await _categoryService.GetCategoryByIdAsync<ResponseDto>(1);
+                    System.Diagnostics.Debug.WriteLine("=============================>" + item.CategoryId + item.ImageURL);
+                    if (tmpResponse != null && tmpResponse.IsSuccess)
+                    {
+                        CategoryDto model2 = JsonConvert.DeserializeObject<CategoryDto>(Convert.ToString(tmpResponse.Result));
+                        item.Category = model2;
+                    }
+                }
             }
             
             return View(list);
@@ -50,12 +64,20 @@ namespace Artisanal.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+                var response1 = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+                
 
-                if (response != null && response.IsSuccess)
+                if (response1 != null && response1.IsSuccess)
                 {
-                    ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
-                    return View(model);
+                    ProductDto model1 = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response1.Result));
+                    var response2 = await _categoryService.GetCategoryByIdAsync<ResponseDto>(model1.CategoryId);
+
+                    if (response2 != null && response2.IsSuccess)
+                    {
+                        CategoryDto model2 = JsonConvert.DeserializeObject<CategoryDto>(Convert.ToString(response2.Result));
+                        model1.Category = model2;
+                        return View(model1);
+                    }
                 }
             }
 

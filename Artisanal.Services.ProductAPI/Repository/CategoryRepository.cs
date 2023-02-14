@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Artisanal.Services.ProductAPI.Repository
 {
-   
     public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _db;

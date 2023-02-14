@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Artisanal.Services.ProductAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230213021504_ProductAPI-Migration")]
+    [Migration("20230214200901_ProductAPI-Migration")]
     partial class ProductAPIMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,11 @@ namespace Artisanal.Services.ProductAPI.Migrations
                         {
                             CategoryId = 1,
                             CategoryName = "categorie1"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "categorie2"
                         });
                 });
 
@@ -56,8 +61,8 @@ namespace Artisanal.Services.ProductAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
 
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
@@ -74,13 +79,15 @@ namespace Artisanal.Services.ProductAPI.Migrations
 
                     b.HasKey("ProductId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             ProductId = 1,
-                            CategoryName = "categorie1",
+                            CategoryId = 1,
                             ImageURL = "1.jpg",
                             Price = 15.0,
                             ProductName = "ChaiseBoisMassif"
@@ -88,7 +95,7 @@ namespace Artisanal.Services.ProductAPI.Migrations
                         new
                         {
                             ProductId = 2,
-                            CategoryName = "categorie2",
+                            CategoryId = 1,
                             ImageURL = "2.jpg",
                             Price = 15.0,
                             ProductName = "RangementBoisMassif"
@@ -96,11 +103,22 @@ namespace Artisanal.Services.ProductAPI.Migrations
                         new
                         {
                             ProductId = 3,
-                            CategoryName = "categorie1",
+                            CategoryId = 2,
                             ImageURL = "3.jpg",
                             Price = 15.0,
                             ProductName = "DecorArtis"
                         });
+                });
+
+            modelBuilder.Entity("Artisanal.Services.ProductAPI.Models.Product", b =>
+                {
+                    b.HasOne("Artisanal.Services.ProductAPI.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
