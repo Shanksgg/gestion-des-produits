@@ -1,5 +1,13 @@
 # Crafty - Gestion Des Produits
-<h3>Screenshots</h3>
+<h2>Créer par:</h2>
+<ul>
+<li>Anass Soukrat</li>
+<li>Hamza Janate</li>
+<li>Ayoub Daanoune</li>
+<li>Houda Saghir</li>
+</ul>
+
+<h2>Screenshots</h23>
 <h4>Product Index</h4>
 <img src="https://github.com/Shanksgg/gestion-des-produits/blob/master/Screenshots%20and%20Demo/ProductIndex.PNG"/>
 <hr>
