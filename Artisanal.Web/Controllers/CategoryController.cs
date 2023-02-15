@@ -100,11 +100,9 @@ namespace Artisanal.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CategoryDelete(CategoryDto model)
         {
-            System.Diagnostics.Debug.WriteLine("HERE");
             if (ModelState.IsValid)
             {
                 var response = await _categoryService.DeleteCategoryAsync<ResponseDto>(model.CategoryId);
-                System.Diagnostics.Debug.WriteLine("V");
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(CategoryIndex));

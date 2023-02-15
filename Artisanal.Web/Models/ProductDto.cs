@@ -1,4 +1,6 @@
-﻿namespace Artisanal.Web.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+
+namespace Artisanal.Web.Models
 {
     public class ProductDto
     {

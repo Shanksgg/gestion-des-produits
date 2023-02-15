@@ -1,59 +1,78 @@
 ﻿@{
     ViewData["Title"] = "Edit Product";
 }
-@model Artisanal.Web.Models.ProductDto
+@model Artisanal.Web.Models.ProductCategoryViewModel
 
 <form asp-action="ProductEdit">
-    <input asp-for="ProductId" hidden />
+    <input asp-for="Product.ProductId" hidden />
     <div class="container border-3">
-        <h1 class="text-primary">Edit Product</h1>
+        <div class="col mt-5">
+            <h3>Edit Product</h3>
+            <p class="text-muted">Lorem Ipsum is simply dummy text  </p>
+            <hr />
+        </div>
         <div class="row">
             <div as-asp-validation-summary="ModelOnly" class="text-danger"></div>
             @* Product Name *@
-            <div class="col-2">
-                <label asp-for="ProductName" class="control-label pt-2" style="font-size: 1.2rem">
-                </label>
-            </div>
-            <div class="col-10 pb-3">
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
+            <div class="row">
+                <div class="col-2">
+                    <label asp-for="Product.ProductName" class="control-label pt-2 fw-semibold">
+                        Name
+                    </label>
+                </div>
+                <div class="col-5 pb-3">
+                    <input asp-for="Product.ProductName" class="form-control ef-input"  required/>
+                    <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+                </div>
             </div>
 
             @* Category Name *@
-            <div class="col-2">
-                <label asp-for="Category.CategoryName" class="control-label pt-2" style="font-size: 1.2rem">
-                </label>
-            </div>
-            <div class="col-10 pb-3">
-                <input asp-for="Category.CategoryName" class="form-control" />
-                <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+            <div class="row">
+                <div class="col-2">
+                    <label asp-for="Category.CategoryName" class="control-label pt-2 fw-semibold">
+                        Category
+                    </label>
+                </div>
+                <div class="col-5 pb-3">
+                    <select asp-for="selectedCountry" class="form-select" aria-label="Countries select" asp-items="Model.CategoriesSelectList">
+                    </select>
+                    <span asp-validation-for="Category.CategoryName" class="text-danger"></span>
+                </div>
             </div>
 
             @* Price *@
-            <div class="col-2">
-                <label asp-for="Price" class="control-label pt-2" style="font-size: 1.2rem">
-                </label>
-            </div>
-            <div class="col-10 pb-3">
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="row">
+                 <div class="col-2">
+                    <label asp-for="Product.Price" class="control-label pt-2 fw-semibold">
+                        Price
+                    </label>
+                </div>
+                <div class="col-5 pb-3">
+                    <input asp-for="Product.Price" class="form-control ef-input" required />
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
             </div>
 
             @* ImageURL *@
-            <div class="col-2">
-                <label asp-for="ImageURL" class="control-label pt-2" style="font-size: 1.2rem">
-                </label>
-            </div>
-            <div class="col-10 pb-3">
-                <input asp-for="ImageURL" class="form-control" />
-                <span asp-validation-for="ImageURL" class="text-danger"></span>
+            <div class="row">
+                <div class="col-2">
+                    <label asp-for="Product.ImageURL" class="control-label pt-2 fw-semibold">
+                        Image URL
+                    </label>
+                </div>
+                <div class="col-5 pb-3">
+                    <input asp-for="Product.ImageURL" class="form-control ef-input" required />
+                    <span asp-validation-for="Product.ImageURL" class="text-danger"></span>
+                </div>
             </div>
 
-            <div class="col-5 offset-2">
-                <a asp-action="ProductIndex" class="btn btn-primary form-control">Back to List</a>
-            </div>
-            <div class="col-5">
-                <input type="submit" value="Update" class="btn btn-info form-control" />
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <input type="submit" value="Update" class="btn btn-primary" />
+                </div>
+                <div class="col">
+                    <a asp-action="ProductIndex" class="btn btn-link text-decoration-none">Back to List</a>
+                </div>
             </div>
         </div>
     </div>

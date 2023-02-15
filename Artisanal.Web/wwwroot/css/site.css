@@ -16,3 +16,42 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.table > :not(:last-child) > :last-child > * {
+    border-top-width: 1px !important;
+    border-top-color: inherit !important;
+    border-bottom-color: inherit !important;
+}
+
+.ef-table td:last-child {
+    width: 80px;
+}
+
+.form-control:focus + .btn-secondary {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+#search-btn .btn-check:focus + .btn-secondary, .btn-secondary:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.input-group:focus-within {
+    border-color: #05f;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    border-radius: 6px;
+    outline: #86b7fe;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.ef-input:focus {
+    border-color: #05f !important;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25) !important;
+    border-radius: 6px !important;
+    outline: #86b7fe !important;
+}
