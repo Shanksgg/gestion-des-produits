@@ -3,21 +3,37 @@
 }
 
 @model IEnumerable<Artisanal.Web.Models.CategoryDto>
-<div class="container p-4 border">
-    <div class="row pb-2">
-        <div class="col">
-            <h1 class="text-info">Category List</h1>
+<div class="container">
+    <div class="col mt-5">
+        <h3>Category</h3>
+        <p class="text-muted">Lorem Ipsum is simply dummy text</p>
+        <hr />
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <form asp-controller="Categories" asp-action="IndexCategory">
+                <div class="input-group">
+                    <input type="text" class="form-control" 
+                        placeholder="Search by category name" a
+                        ria-label="" 
+                        aria-describedby="search-btn">
+                    <button class="btn btn-secondary" type="button" id="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="col text-end pt-1">
-            <a asp-action="CategoryCreate" class="btn btn-outline-info">
-                <i class="fas fa-plus mx-2"></i>Create New Category
+        <div class="col-md-9">
+            <a asp-action="CategoryCreate" class="btn btn-primary">
+                <i class="fas fa-plus mx-2"></i>Create Category
             </a>
         </div>
     </div>
-    <table class="table">
+    <table class="table ef-table expand-first-child-3">
         <thead>
             <tr>
                 <th>Name</th>
+                <th>Description</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -27,15 +43,18 @@
             {
                 <tr>
                     <td>@item.CategoryName</td>
+                    <td>Lorem Ipsum is simply dummy text</td>
                     <td>
-                        <a asp-action="CategoryEdit" class="btn btn-success"
-                       asp-route-categoryId="@item.CategoryId">
+                       <div class="d-flex justify-content-around">
+                            <a asp-action="CategoryEdit"
+                                asp-route-categoryId="@item.CategoryId">
                             <i class="fas fa-edit"></i>
-                        </a>
-                        <a asp-action="CategoryDelete" class="btn btn-danger"
-                       asp-route-categoryId="@item.CategoryId">
-                            <i class="fas fa-trash"></i>
-                        </a>
+                            </a>
+                            <a asp-action="CategoryDelete"
+                                asp-route-categoryId="@item.CategoryId">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
                     </td>
                 </tr>
             }

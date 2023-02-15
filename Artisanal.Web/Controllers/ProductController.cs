@@ -18,11 +18,12 @@ namespace Artisanal.Web.Controllers
             _categoryService = categoryService;
         }
 
-        public async Task<IActionResult> ProductIndex()
+        public async Task<IActionResult> ProductIndex(string name)
         {
             List<ProductDto> list = new();
             var response = await _productService.GetAllProductsAsync<ResponseDto>();
-            if(response != null) { 
+
+            if (response != null) { 
                 list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
 
                 foreach (var item in list)
@@ -34,12 +35,10 @@ namespace Artisanal.Web.Controllers
                         item.Category = model2;
                     }
                 }
+                return View(list);
             }
-            
-            return View(list);
+            return View();
         }
-
-        
 
         public async Task<IActionResult> ProductCreate()
         {

@@ -11,13 +11,14 @@
     </div>
     <div class="row mb-4">
         <div class="col-md-3">
-            <form asp-controller="Products" asp-action="IndexCategory">
+            <form asp-controller="Product" asp-action="ProductIndex">
                 <div class="input-group">
                     <input type="text" class="form-control" 
                         placeholder="Search by product name" a
-                        ria-label="" 
+                        aria-label="" 
+                        name="searchName"
                         aria-describedby="search-btn">
-                    <button class="btn btn-secondary" type="button" id="search-btn">
+                    <button class="btn btn-secondary" type="submit" id="search-btn">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>
@@ -29,37 +30,55 @@
             </a>
         </div>
     </div>
-    <table class="table ef-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (var item in Model)
-            {
+    
+    @if (Model == null)
+    {
+        <table class="table ef-table">   
+            <thead>
                 <tr>
-                    <td>@item.ProductName</td>
-                    <td>@item.Category.CategoryName</td>
-                    <td>@item.Price MAD</td>
-                    <td>
-                        <div class="d-flex justify-content-around">
-                            <a asp-action="ProductEdit"
-                            asp-route-productId="@item.ProductId">
-                            <i class="fas fa-edit"></i>
-                            </a>
-                            <a asp-action="ProductDelete"
-                                asp-route-productId="@item.ProductId">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </div>
-                    </td>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+        </table>
+        <span class="text-muted">List is empty</span>
+    }      
+    else
+    {
+        <table class="table ef-table">   
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td>@item.Price MAD</td>
+                        <td>
+                            <div class="d-flex justify-content-around">
+                                <a asp-action="ProductEdit"
+                                asp-route-productId="@item.ProductId">
+                                <i class="fas fa-edit"></i>
+                                </a>
+                                <a asp-action="ProductDelete"
+                                    asp-route-productId="@item.ProductId">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    
 </div>

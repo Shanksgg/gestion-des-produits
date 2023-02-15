@@ -61,7 +61,7 @@ namespace Artisanal.Web.Services
                 ApiType = SD.ApiType.PUT,
                 Data= productDto,
                 Url = SD.ProductAPIBase + "/api/products",
-               // AccessToken = token
+                // AccessToken = token
 
             });
         }

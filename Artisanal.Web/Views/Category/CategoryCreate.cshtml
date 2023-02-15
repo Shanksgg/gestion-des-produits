@@ -4,27 +4,35 @@
 @model Artisanal.Web.Models.CategoryDto
 
 <form asp-action="CategoryCreate">
-    <div class="container border-3">
-        <h1 class="text-primary">Create Category</h1>
+    <div class="container">
+        <div class="col mt-5">
+            <h3>Create Category</h3>
+            <p class="text-muted">Lorem Ipsum is simply dummy text</p>
+            <hr />
+        </div>
         <div class="row">
             <div as-asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @* Ca Name *@
-            <div class="col-2">
-                <label asp-for="CategoryName" class="control-label pt-2" style="font-size: 1.2rem">
-
+            @* Category Name *@
+            <div class="row">
+                <div class="col-2">
+                <label asp-for="CategoryName" class="control-label pt-2 fw-semibold">
+                    Name
                 </label>
-            </div>
-            <div class="col-10 pb-3">
-                <input asp-for="CategoryName" class="form-control" />
-                <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+                <div class="col-5 pb-3">
+                    <input asp-for="CategoryName" class="form-control ef-input" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
             </div>
 
             @* Foot *@
-            <div class="col-5 offset-2">
-                <a asp-action="CategoryIndex" class="btn btn-primary form-control">Back to List</a>
-            </div>
-            <div class="col-5">
-                <input type="submit" value="Create" class="btn btn-info form-control" />
+            <div class="row mt-4">
+                <div class="col-auto">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <div class="col">
+                    <a asp-action="CategoryIndex" class="btn btn-link text-decoration-none">Back to List</a>
+                </div>
             </div>
         </div>
     </div>
