@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Artisanal.Services.ProductAPI", "Artisanal.Services.ProductAPI\Artisanal.Services.ProductAPI.csproj", "{FF2D8835-42A2-47EF-8DCF-4BA21FAD5AB2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots And Demo", "Screenshots And Demo", "{8BDC50A0-D219-47DA-8ABA-862A65FDF32B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
